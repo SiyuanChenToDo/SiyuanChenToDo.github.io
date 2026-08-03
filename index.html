@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siyuan Chen 陈思远 — AI Researcher</title>
+<meta name="description" content="Siyuan Chen (陈思远) — Undergraduate AI researcher working on LLM-based multi-agent systems, knowledge graphs, and automated scientific discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D1321;
+  --ink-2:#131C30;
+  --ink-line:rgba(201,168,106,.28);
+  --gold:#C9A86A;
+  --gold-dim:#8f7a4f;
+  --paper:#FAF7F0;
+  --paper-2:#F1EDE2;
+  --paper-ink:#1C2430;
+  --paper-mut:#5d6572;
+  --blue:#4E6CA0;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Source Serif 4',Georgia,serif;
+  --display:'Fraunces',Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--paper-ink);font-family:var(--serif);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:inherit}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  padding:18px 32px;mix-blend-mode:difference;color:#EDE6D6}
+nav .brand{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-decoration:none}
+nav .links{display:flex;gap:26px}
+nav .links a{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-decoration:none;opacity:.75;transition:opacity .25s}
+nav .links a:hover{opacity:1}
+nav .links a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:760px){nav .links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;background:radial-gradient(1200px 700px at 72% 30%,#1B2745 0%,var(--ink) 60%);
+  color:#EDE6D6;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#graph{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:120px 40px 80px;width:100%}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(52px,8.5vw,118px);line-height:1.02;letter-spacing:-.01em;margin:26px 0 6px}
+.hero h1 .cn{font-size:.42em;color:var(--gold);font-weight:400;letter-spacing:.12em;vertical-align:middle;margin-left:.35em;white-space:nowrap}
+.hero .role{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(19px,2.4vw,27px);color:#B8C1D8;max-width:640px;margin-top:18px}
+.hero .role em{color:var(--gold);font-style:italic}
+.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-decoration:none;padding:14px 26px;border:1px solid var(--gold);color:var(--gold);transition:all .3s}
+.btn:hover{background:var(--gold);color:var(--ink)}
+.btn.ghost{border-color:rgba(237,230,214,.3);color:#EDE6D6}
+.btn.ghost:hover{background:#EDE6D6;color:var(--ink);border-color:#EDE6D6}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(237,230,214,.45)}
+.hero-scroll::after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);margin:10px auto 0}
+
+/* ---------- statement strip ---------- */
+.strip{background:var(--ink);color:#EDE6D6;border-top:1px solid var(--ink-line);padding:26px 0;overflow:hidden}
+.strip-inner{max-width:1120px;margin:0 auto;padding:0 40px;display:flex;align-items:baseline;gap:28px;flex-wrap:wrap}
+.strip .q{font-family:var(--display);font-style:italic;font-size:clamp(20px,3vw,30px);font-weight:300}
+.strip .q b{color:var(--gold);font-weight:400}
+.strip .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:rgba(237,230,214,.5)}
+
+/* ---------- sections ---------- */
+section.block{padding:110px 0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+.sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;border-bottom:1px solid rgba(28,36,48,.14);padding-bottom:22px}
+.sec-head .idx{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--gold-dim)}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,44px);letter-spacing:-.01em}
+.sec-head .note{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--paper-mut)}
+@media(max-width:760px){.sec-head{flex-wrap:wrap;gap:12px}.sec-head .note{margin-left:0}}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:64px}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px}}
+.about-grid p{margin-bottom:18px;color:var(--paper-mut)}
+.about-grid p b{color:var(--paper-ink);font-weight:600}
+.about-grid p .gd{color:var(--gold-dim)}
+.facts{border:1px solid rgba(28,36,48,.16);background:var(--paper-2);padding:30px 30px 12px}
+.fact{padding:0 0 22px;border-bottom:1px dashed rgba(28,36,48,.14);margin-bottom:20px}
+.fact:last-child{border-bottom:none;margin-bottom:8px}
+.fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:6px}
+.fact .v{font-family:var(--display);font-size:21px;font-weight:400}
+.fact .v small{font-family:var(--serif);font-size:13px;color:var(--paper-mut)}
+
+/* research */
+.res-list{border-top:1px solid rgba(28,36,48,.14)}
+.res{display:grid;grid-template-columns:56px 1fr 1.1fr;gap:28px;padding:34px 0;border-bottom:1px solid rgba(28,36,48,.14);align-items:start}
+.res .no{font-family:var(--mono);font-size:12px;color:var(--gold-dim);letter-spacing:.15em;padding-top:8px}
+.res h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.3}
+.res p{color:var(--paper-mut);font-size:15.5px}
+@media(max-width:760px){.res{grid-template-columns:1fr;gap:10px}.res .no{padding-top:0}}
+
+/* publications */
+.pub{border:1px solid rgba(28,36,48,.16);padding:34px 36px;margin-bottom:22px;background:#fff;position:relative;transition:transform .35s,box-shadow .35s}
+.pub:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(13,19,33,.35)}
+.pub .meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;padding:5px 12px;border:1px solid}
+.chip.venue{color:var(--blue);border-color:rgba(78,108,160,.45)}
+.chip.tier{color:var(--paper-ink);border-color:rgba(28,36,48,.3)}
+.chip.status{color:#fff;background:var(--gold-dim);border-color:var(--gold-dim)}
+.pub h3{font-family:var(--display);font-weight:600;font-size:clamp(19px,2.3vw,24px);line-height:1.35;margin-bottom:12px}
+.pub p{color:var(--paper-mut);font-size:15.5px;max-width:760px}
+.pub .links{margin-top:18px;display:flex;gap:22px}
+.pub .links a{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-decoration:none;color:var(--blue);border-bottom:1px solid rgba(78,108,160,.4);padding-bottom:2px}
+.pub .links a:hover{color:var(--ink);border-color:var(--ink)}
+.pub-note{font-family:var(--mono);font-size:12px;color:var(--paper-mut);letter-spacing:.06em;margin-top:6px}
+
+/* projects */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.proj-grid{grid-template-columns:1fr}}
+.proj{border:1px solid rgba(28,36,48,.16);padding:28px;display:flex;flex-direction:column;background:var(--paper-2);text-decoration:none;transition:all .3s}
+.proj:hover{border-color:var(--gold-dim);background:#fff}
+.proj .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:14px}
+.proj h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.35;margin-bottom:10px}
+.proj p{font-size:14px;color:var(--paper-mut);flex:1}
+.proj .go{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue);margin-top:18px}
+
+/* beyond */
+.beyond{background:var(--ink);color:#EDE6D6}
+.beyond .sec-head{border-color:rgba(237,230,214,.14)}
+.beyond .sec-head .note{color:rgba(237,230,214,.5)}
+.beyond-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(237,230,214,.14);border:1px solid rgba(237,230,214,.14)}
+@media(max-width:860px){.beyond-grid{grid-template-columns:repeat(2,1fr)}}
+.hob{background:var(--ink);padding:38px 26px;text-align:center;transition:background .3s}
+.hob:hover{background:var(--ink-2)}
+.hob .ic{font-size:30px;margin-bottom:14px}
+.hob .t{font-family:var(--display);font-size:19px;margin-bottom:6px}
+.hob .d{font-size:13px;color:rgba(237,230,214,.55);font-family:var(--mono);letter-spacing:.05em}
+.beyond .soon{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:rgba(237,230,214,.45);margin-top:26px;text-align:center}
+
+/* contact / footer */
+.contact{background:var(--ink);color:#EDE6D6;padding:130px 0 60px;border-top:1px solid var(--ink-line)}
+.contact h2{font-family:var(--display);font-weight:300;font-size:clamp(38px,6vw,74px);line-height:1.1;letter-spacing:-.01em;max-width:820px}
+.contact h2 em{color:var(--gold);font-style:italic}
+.contact .sub{color:#B8C1D8;max-width:560px;margin-top:26px;font-size:16px}
+.contact .cta-row{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
+footer{max-width:1120px;margin:0 auto;padding:60px 40px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:rgba(237,230,214,.4)}
+footer a{color:rgba(237,230,214,.65);text-decoration:none}
+footer a:hover{color:var(--gold)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top">SIYUAN CHEN</a>
+  <div class="links">
+    <a href="#about">ABOUT</a>
+    <a href="#research">RESEARCH</a>
+    <a href="#publications">PUBLICATIONS</a>
+    <a href="#projects">PROJECTS</a>
+    <a href="#beyond">BEYOND</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <canvas id="graph" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">AI Researcher · AI4Science</div>
+    <h1>Siyuan Chen<span class="cn">陈思远</span></h1>
+    <p class="role">Undergraduate researcher exploring how <em>multi-agent collaboration</em> and <em>inspiration graphs</em> can push machines toward genuine scientific discovery.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#publications">PUBLICATIONS</a>
+      <a class="btn ghost" href="#contact">GET IN TOUCH</a>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</header>
+
+<!-- ================= STATEMENT ================= -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="q">“Towards machines that can <b>do science</b>.”</div>
+    <div class="tag">HUAZHONG AGRICULTURAL UNIVERSITY · AI · CLASS OF 2027</div>
+  </div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§01</span><h2>About</h2>
+      <span class="note">WHO I AM</span>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm <b>Siyuan Chen (陈思远)</b>, an undergraduate student majoring in <b>Artificial Intelligence</b> at <b>Huazhong Agricultural University (HZAU)</b> — a 211 &amp; Double First-Class university in Wuhan, China.</p>
+        <p>My research sits at the intersection of <b>LLM-based multi-agent systems</b> and <b>automated scientific discovery</b>. I lead <span class="gd">FIG-MAC</span>, a framework in which a fine-grained <i>inspiration graph</i> orchestrates how agents collaborate, retrieve, and iteratively reason — with the goal of generating scientific hypotheses that are not just plausible, but <b>genuinely novel</b>.</p>
+        <p>Beyond hypothesis generation, I work on <b>knowledge graph-enhanced reasoning &amp; retrieval</b> and <b>multimodal understanding</b> — most recently, teaching models to read comics the way humans do: panel by panel, in narrative order.</p>
+        <p>I'm currently seeking <b>2027 Fall PhD / direct-PhD opportunities</b>, as well as research collaborations and visiting internships in LLM agents, AI4Science, and reasoning.</p>
+      </div>
+      <aside class="facts reveal">
+        <div class="fact"><div class="k">Affiliation</div><div class="v">HZAU <small>· B.Eng. Artificial Intelligence</small></div></div>
+        <div class="fact"><div class="k">Rank</div><div class="v">Top 5% <small>· 2 / 52 in major</small></div></div>
+        <div class="fact"><div class="k">GPA</div><div class="v">3.72 <small>/ 4.0</small></div></div>
+        <div class="fact"><div class="k">Seeking</div><div class="v">PhD <small>· 2027 Fall</small></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESEARCH ================= -->
+<section class="block" id="research" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§02</span><h2>Research</h2>
+      <span class="note">WHAT I THINK ABOUT</span>
+    </div>
+    <div class="res-list">
+      <div class="res reveal">
+        <span class="no">R·1</span>
+        <h3>LLM-based Multi-Agent Systems</h3>
+        <p>How should a society of language-model agents be structured so that debate, division of labor, and iterative critique compound into discoveries none of them could reach alone?</p>
+      </div>
+      <div class="res reveal">
+        <span class="no">R·2</span>
+        <h3>Automated Scientific Discovery</h3>
+        <p>Modeling the "spark" of research as a fine-grained inspiration graph — linking papers, concepts, and methods — so hypothesis generation becomes a navigable, structured process rather than a lucky guess.</p>
+      </div>
+      <div class="res reveal">
+        <span class="no">R·3</span>
+        <h3>Knowledge Graphs &amp; Retrieval-Augmented Reasoning</h3>
+        <p>Grounding LLM reasoning in structured knowledge: graph-enhanced retrieval, link prediction, and reasoning paths that stay faithful to evidence.</p>
+      </div>
+      <div class="res reveal">
+        <span class="no">R·4</span>
+        <h3>Multimodal Understanding</h3>
+        <p>Structured reasoning over images and text together — from comic narrative order to scientific figures — where layout and sequence carry the meaning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section class="block" id="publications" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§03</span><h2>Publications</h2>
+      <span class="note">WHAT I'VE WRITTEN</span>
+    </div>
+
+    <article class="pub reveal">
+      <div class="meta">
+        <span class="chip venue">ECML-PKDD</span>
+        <span class="chip tier">CCF-B</span>
+        <span class="chip status">UNDER REVIEW</span>
+      </div>
+      <h3>FIG-MAC: Fine-grained Inspiration Graph Empowered Multi-Agent Collaboration for Automated Scientific Discovery</h3>
+      <p>A multi-agent framework in which a fine-grained inspiration graph orchestrates collaboration, retrieval, and iterative reasoning to generate novel scientific hypotheses.</p>
+      <div class="links">
+        <a href="https://github.com/SiyuanChenToDo/FIG-MAC-Fine-grained-Inspiration-Graph-Empowered-Multi-Agent-Collaboration-for-Automated-Scientific" target="_blank" rel="noopener">CODE →</a>
+      </div>
+    </article>
+
+    <article class="pub reveal">
+      <div class="meta">
+        <span class="chip venue">EMNLP</span>
+        <span class="chip tier">CCF-B</span>
+        <span class="chip status">UNDER REVIEW</span>
+      </div>
+      <h3>Knowledge Graph-enhanced Agent Framework for Scientific Discovery in Bioinformatics</h3>
+      <p>A knowledge-graph-grounded agent system that supports scientific discovery workflows in bioinformatics, keeping generated hypotheses anchored to structured biological knowledge.</p>
+    </article>
+
+    <article class="pub reveal">
+      <div class="meta">
+        <span class="chip venue">NLPCC</span>
+        <span class="chip tier">CCF-C</span>
+        <span class="chip status">UNDER REVIEW</span>
+      </div>
+      <h3>Reading Between the Panels: Structured Multimodal Reasoning for Comic Narrative Understanding</h3>
+      <p>Structured multimodal reasoning that recovers comic reading order and narrative flow — teaching models to follow a story across panels the way human readers do.</p>
+      <div class="links">
+        <a href="https://github.com/SiyuanChenToDo/Reading-Between-the-Panels-Structured-Multimodal-Reasoning-for-Comic-Narrative-Understanding" target="_blank" rel="noopener">CODE →</a>
+      </div>
+    </article>
+
+    <div class="pub-note reveal">📌 MANUSCRIPTS &amp; FULL CODE WILL BE RELEASED UPON ACCEPTANCE.</div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§04</span><h2>Projects</h2>
+      <span class="note">WHAT I'VE BUILT</span>
+    </div>
+    <div class="proj-grid">
+      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/FIG-MAC-Fine-grained-Inspiration-Graph-Empowered-Multi-Agent-Collaboration-for-Automated-Scientific" target="_blank" rel="noopener">
+        <div class="k">Multi-Agent · Python</div>
+        <h3>FIG-MAC</h3>
+        <p>Inspiration-graph-empowered multi-agent collaboration for automated scientific hypothesis generation.</p>
+        <div class="go">VIEW ON GITHUB →</div>
+      </a>
+      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/Reading-Between-the-Panels-Structured-Multimodal-Reasoning-for-Comic-Narrative-Understanding" target="_blank" rel="noopener">
+        <div class="k">Multimodal · Python</div>
+        <h3>Reading Between the Panels</h3>
+        <p>Structured multimodal reasoning for comic narrative understanding and reading-order recovery.</p>
+        <div class="go">VIEW ON GITHUB →</div>
+      </a>
+      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/Human-Evaluation-Website" target="_blank" rel="noopener">
+        <div class="k">Web · HTML</div>
+        <h3>Human Evaluation Website</h3>
+        <p>A web platform for running human evaluation studies on model outputs.</p>
+        <div class="go">VIEW ON GITHUB →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEYOND ================= -->
+<section class="block beyond" id="beyond">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">§05</span><h2>Beyond Research</h2>
+      <span class="note">WHO I AM OFF-DUTY</span>
+    </div>
+    <div class="beyond-grid reveal">
+      <div class="hob"><div class="ic">🏀</div><div class="t">Basketball</div><div class="d">ON THE COURT</div></div>
+      <div class="hob"><div class="ic">📷</div><div class="t">Photography</div><div class="d">THROUGH THE LENS</div></div>
+      <div class="hob"><div class="ic">📖</div><div class="t">Reading</div><div class="d">PAGE BY PAGE</div></div>
+      <div class="hob"><div class="ic">✈️</div><div class="t">Travel</div><div class="d">ON THE ROAD</div></div>
+    </div>
+    <div class="soon reveal">THIS CORNER IS STILL BEING WRITTEN — MORE ABOUT MY LIFE OFF-DUTY COMING SOON.</div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's <em>do science</em> together.</h2>
+    <p class="sub reveal">Open to 2027 Fall PhD positions, research collaborations, and visiting internships in LLM agents, AI4Science, knowledge graphs, and reasoning. If any of this resonates — I'd love to hear from you.</p>
+    <div class="cta-row reveal">
+      <a class="btn" href="mailto:2637427015@qq.com">EMAIL ME</a>
+      <a class="btn ghost" href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener">GITHUB</a>
+    </div>
+  </div>
+  <footer>
+    <span>© 2026 SIYUAN CHEN · 陈思远</span>
+    <span>BUILT WITH CURIOSITY · <a href="#top">BACK TO TOP ↑</a></span>
+  </footer>
+</section>
+
+<script>
+/* ============ Inspiration-graph hero canvas ============ */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = document.getElementById('graph');
+  const ctx = cv.getContext('2d');
+  const LABELS = ['Multi-Agent Systems','Inspiration Graph','AI4Science','Knowledge Graph','RAG','Hypothesis','Reasoning','Retrieval','Multimodal','Discovery','Debate','Evidence'];
+  let W,H,nodes=[],mouse={x:-1e4,y:-1e4},t=0,DPR=Math.min(devicePixelRatio||1,2);
+
+  function resize(){
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W*DPR; cv.height = H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  function init(){
+    resize();
+    nodes = LABELS.map((label,i)=>{
+      const a = (i/LABELS.length)*Math.PI*2;
+      return {
+        label,
+        x: W*(0.5+0.36*Math.cos(a)) + (Math.random()-0.5)*W*0.12,
+        y: H*(0.5+0.34*Math.sin(a)) + (Math.random()-0.5)*H*0.14,
+        vx:(Math.random()-0.5)*0.22, vy:(Math.random()-0.5)*0.22,
+        r: 2.2+Math.random()*2.2
+      };
+    });
+  }
+  const LINK = 190;
+  function step(){
+    t += 0.008;
+    ctx.clearRect(0,0,W,H);
+    for(const n of nodes){
+      n.x += n.vx; n.y += n.vy;
+      if(n.x<40||n.x>W-40) n.vx*=-1;
+      if(n.y<40||n.y>H-40) n.vy*=-1;
+      const dx=n.x-mouse.x, dy=n.y-mouse.y, d2=dx*dx+dy*dy;
+      if(d2<120*120){ const d=Math.sqrt(d2)||1; n.x+=dx/d*0.6; n.y+=dy/d*0.6; }
+    }
+    /* edges */
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a=nodes[i],b=nodes[j];
+        const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
+        if(d<LINK){
+          const o=(1-d/LINK)*0.5;
+          ctx.strokeStyle=`rgba(201,168,106,${o*0.55})`;
+          ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          /* a travelling "hypothesis" pulse on one edge at a time */
+          if(((i*31+j*17)%23)===Math.floor(t*4)%23){
+            const p=(t*1.6)%1;
+            const px=a.x+(b.x-a.x)*p, py=a.y+(b.y-a.y)*p;
+            ctx.fillStyle='rgba(201,168,106,.9)';
+            ctx.beginPath();ctx.arc(px,py,2,0,7);ctx.fill();
+          }
+        }
+      }
+    }
+    /* nodes + labels */
+    ctx.font='10px "IBM Plex Mono",monospace';
+    for(const n of nodes){
+      const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*5);
+      g.addColorStop(0,'rgba(201,168,106,.5)');g.addColorStop(1,'rgba(201,168,106,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(n.x,n.y,n.r*5,0,7);ctx.fill();
+      ctx.fillStyle='#C9A86A';ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,7);ctx.fill();
+      ctx.fillStyle='rgba(237,230,214,.55)';
+      ctx.fillText(n.label.toUpperCase(), n.x+10, n.y+4);
+    }
+    if(!reduce) requestAnimationFrame(step);
+  }
+  addEventListener('resize', ()=>{init(); if(reduce) step();});
+  cv.parentElement.addEventListener('mousemove', e=>{
+    const r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;
+  });
+  cv.parentElement.addEventListener('mouseleave', ()=>{mouse.x=-1e4;mouse.y=-1e4;});
+  init(); step();
+})();
+
+/* ============ scroll reveal ============ */
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('on'));return;}
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('on'); io.unobserve(en.target);} });
+  },{threshold:.12});
+  els.forEach(e=>io.observe(e));
+})();
+</script>
+</body>
+</html>
