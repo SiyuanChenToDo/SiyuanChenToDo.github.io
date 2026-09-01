@@ -1,449 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Siyuan Chen 陈思远 — AI Researcher</title>
-<meta name="description" content="Siyuan Chen (陈思远) — Undergraduate AI researcher working on LLM-based multi-agent systems, knowledge graphs, and automated scientific discovery.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#0D1321;
-  --ink-2:#131C30;
-  --ink-line:rgba(201,168,106,.28);
-  --gold:#C9A86A;
-  --gold-dim:#8f7a4f;
-  --paper:#FAF7F0;
-  --paper-2:#F1EDE2;
-  --paper-ink:#1C2430;
-  --paper-mut:#5d6572;
-  --blue:#4E6CA0;
-  --mono:'IBM Plex Mono',monospace;
-  --serif:'Source Serif 4',Georgia,serif;
-  --display:'Fraunces',Georgia,serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--paper-ink);font-family:var(--serif);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
-::selection{background:var(--gold);color:var(--ink)}
-a{color:inherit}
-
-/* ---------- nav ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
-  padding:18px 32px;mix-blend-mode:difference;color:#EDE6D6}
-nav .brand{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-decoration:none}
-nav .links{display:flex;gap:26px}
-nav .links a{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-decoration:none;opacity:.75;transition:opacity .25s}
-nav .links a:hover{opacity:1}
-nav .links a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-@media(max-width:760px){nav .links{display:none}}
-
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:100vh;background:radial-gradient(1200px 700px at 72% 30%,#1B2745 0%,var(--ink) 60%);
-  color:#EDE6D6;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-#graph{position:absolute;inset:0;width:100%;height:100%}
-.hero-inner{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:120px 40px 80px;width:100%}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
-.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(52px,8.5vw,118px);line-height:1.02;letter-spacing:-.01em;margin:26px 0 6px}
-.hero h1 .cn{font-size:.42em;color:var(--gold);font-weight:400;letter-spacing:.12em;vertical-align:middle;margin-left:.35em;white-space:nowrap}
-.hero .role{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(19px,2.4vw,27px);color:#B8C1D8;max-width:640px;margin-top:18px}
-.hero .role em{color:var(--gold);font-style:italic}
-.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
-.btn{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-decoration:none;padding:14px 26px;border:1px solid var(--gold);color:var(--gold);transition:all .3s}
-.btn:hover{background:var(--gold);color:var(--ink)}
-.btn.ghost{border-color:rgba(237,230,214,.3);color:#EDE6D6}
-.btn.ghost:hover{background:#EDE6D6;color:var(--ink);border-color:#EDE6D6}
-.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(237,230,214,.45)}
-.hero-scroll::after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);margin:10px auto 0}
-
-/* ---------- statement strip ---------- */
-.strip{background:var(--ink);color:#EDE6D6;border-top:1px solid var(--ink-line);padding:26px 0;overflow:hidden}
-.strip-inner{max-width:1120px;margin:0 auto;padding:0 40px;display:flex;align-items:baseline;gap:28px;flex-wrap:wrap}
-.strip .q{font-family:var(--display);font-style:italic;font-size:clamp(20px,3vw,30px);font-weight:300}
-.strip .q b{color:var(--gold);font-weight:400}
-.strip .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:rgba(237,230,214,.5)}
-
-/* ---------- sections ---------- */
-section.block{padding:110px 0}
-.wrap{max-width:1120px;margin:0 auto;padding:0 40px}
-.sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:56px;border-bottom:1px solid rgba(28,36,48,.14);padding-bottom:22px}
-.sec-head .idx{font-family:var(--mono);font-size:12px;letter-spacing:.25em;color:var(--gold-dim)}
-.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,44px);letter-spacing:-.01em}
-.sec-head .note{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--paper-mut)}
-@media(max-width:760px){.sec-head{flex-wrap:wrap;gap:12px}.sec-head .note{margin-left:0}}
-
-/* about */
-.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:64px}
-@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:40px}}
-.about-grid p{margin-bottom:18px;color:var(--paper-mut)}
-.about-grid p b{color:var(--paper-ink);font-weight:600}
-.about-grid p .gd{color:var(--gold-dim)}
-.facts{border:1px solid rgba(28,36,48,.16);background:var(--paper-2);padding:30px 30px 12px}
-.fact{padding:0 0 22px;border-bottom:1px dashed rgba(28,36,48,.14);margin-bottom:20px}
-.fact:last-child{border-bottom:none;margin-bottom:8px}
-.fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:6px}
-.fact .v{font-family:var(--display);font-size:21px;font-weight:400}
-.fact .v small{font-family:var(--serif);font-size:13px;color:var(--paper-mut)}
-
-/* research */
-.res-list{border-top:1px solid rgba(28,36,48,.14)}
-.res{display:grid;grid-template-columns:56px 1fr 1.1fr;gap:28px;padding:34px 0;border-bottom:1px solid rgba(28,36,48,.14);align-items:start}
-.res .no{font-family:var(--mono);font-size:12px;color:var(--gold-dim);letter-spacing:.15em;padding-top:8px}
-.res h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.3}
-.res p{color:var(--paper-mut);font-size:15.5px}
-@media(max-width:760px){.res{grid-template-columns:1fr;gap:10px}.res .no{padding-top:0}}
-
-/* publications */
-.pub{border:1px solid rgba(28,36,48,.16);padding:34px 36px;margin-bottom:22px;background:#fff;position:relative;transition:transform .35s,box-shadow .35s}
-.pub:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(13,19,33,.35)}
-.pub .meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;padding:5px 12px;border:1px solid}
-.chip.venue{color:var(--blue);border-color:rgba(78,108,160,.45)}
-.chip.tier{color:var(--paper-ink);border-color:rgba(28,36,48,.3)}
-.chip.status{color:#fff;background:var(--gold-dim);border-color:var(--gold-dim)}
-.pub h3{font-family:var(--display);font-weight:600;font-size:clamp(19px,2.3vw,24px);line-height:1.35;margin-bottom:12px}
-.pub p{color:var(--paper-mut);font-size:15.5px;max-width:760px}
-.pub .links{margin-top:18px;display:flex;gap:22px}
-.pub .links a{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-decoration:none;color:var(--blue);border-bottom:1px solid rgba(78,108,160,.4);padding-bottom:2px}
-.pub .links a:hover{color:var(--ink);border-color:var(--ink)}
-.pub-note{font-family:var(--mono);font-size:12px;color:var(--paper-mut);letter-spacing:.06em;margin-top:6px}
-
-/* projects */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.proj-grid{grid-template-columns:1fr}}
-.proj{border:1px solid rgba(28,36,48,.16);padding:28px;display:flex;flex-direction:column;background:var(--paper-2);text-decoration:none;transition:all .3s}
-.proj:hover{border-color:var(--gold-dim);background:#fff}
-.proj .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:14px}
-.proj h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.35;margin-bottom:10px}
-.proj p{font-size:14px;color:var(--paper-mut);flex:1}
-.proj .go{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--blue);margin-top:18px}
-
-/* beyond */
-.beyond{background:var(--ink);color:#EDE6D6}
-.beyond .sec-head{border-color:rgba(237,230,214,.14)}
-.beyond .sec-head .note{color:rgba(237,230,214,.5)}
-.beyond-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(237,230,214,.14);border:1px solid rgba(237,230,214,.14)}
-@media(max-width:860px){.beyond-grid{grid-template-columns:repeat(2,1fr)}}
-.hob{background:var(--ink);padding:38px 26px;text-align:center;transition:background .3s}
-.hob:hover{background:var(--ink-2)}
-.hob .ic{font-size:30px;margin-bottom:14px}
-.hob .t{font-family:var(--display);font-size:19px;margin-bottom:6px}
-.hob .d{font-size:13px;color:rgba(237,230,214,.55);font-family:var(--mono);letter-spacing:.05em}
-.beyond .soon{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:rgba(237,230,214,.45);margin-top:26px;text-align:center}
-
-/* contact / footer */
-.contact{background:var(--ink);color:#EDE6D6;padding:130px 0 60px;border-top:1px solid var(--ink-line)}
-.contact h2{font-family:var(--display);font-weight:300;font-size:clamp(38px,6vw,74px);line-height:1.1;letter-spacing:-.01em;max-width:820px}
-.contact h2 em{color:var(--gold);font-style:italic}
-.contact .sub{color:#B8C1D8;max-width:560px;margin-top:26px;font-size:16px}
-.contact .cta-row{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
-footer{max-width:1120px;margin:0 auto;padding:60px 40px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:rgba(237,230,214,.4)}
-footer a{color:rgba(237,230,214,.65);text-decoration:none}
-footer a:hover{color:var(--gold)}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
-.reveal.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;transition:none}
-  *{animation:none!important;transition:none!important}
-}
-</style>
-</head>
-<body>
-
-<nav>
-  <a class="brand" href="#top">SIYUAN CHEN</a>
-  <div class="links">
-    <a href="#about">ABOUT</a>
-    <a href="#research">RESEARCH</a>
-    <a href="#publications">PUBLICATIONS</a>
-    <a href="#projects">PROJECTS</a>
-    <a href="#beyond">BEYOND</a>
-    <a href="#contact">CONTACT</a>
-  </div>
-</nav>
-
-<!-- ================= HERO ================= -->
-<header class="hero" id="top">
-  <canvas id="graph" aria-hidden="true"></canvas>
-  <div class="hero-inner">
-    <div class="eyebrow">AI Researcher · AI4Science</div>
-    <h1>Siyuan Chen<span class="cn">陈思远</span></h1>
-    <p class="role">Undergraduate researcher exploring how <em>multi-agent collaboration</em> and <em>inspiration graphs</em> can push machines toward genuine scientific discovery.</p>
-    <div class="hero-cta">
-      <a class="btn" href="#publications">PUBLICATIONS</a>
-      <a class="btn ghost" href="#contact">GET IN TOUCH</a>
-    </div>
-  </div>
-  <div class="hero-scroll">SCROLL</div>
-</header>
-
-<!-- ================= STATEMENT ================= -->
-<div class="strip">
-  <div class="strip-inner">
-    <div class="q">“Towards machines that can <b>do science</b>.”</div>
-    <div class="tag">HUAZHONG AGRICULTURAL UNIVERSITY · AI · CLASS OF 2027</div>
-  </div>
-</div>
-
-<!-- ================= ABOUT ================= -->
-<section class="block" id="about">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx">§01</span><h2>About</h2>
-      <span class="note">WHO I AM</span>
-    </div>
-    <div class="about-grid">
-      <div class="reveal">
-        <p>I'm <b>Siyuan Chen (陈思远)</b>, an undergraduate student majoring in <b>Artificial Intelligence</b> at <b>Huazhong Agricultural University (HZAU)</b> — a 211 &amp; Double First-Class university in Wuhan, China.</p>
-        <p>My research sits at the intersection of <b>LLM-based multi-agent systems</b> and <b>automated scientific discovery</b>. I lead <span class="gd">FIG-MAC</span>, a framework in which a fine-grained <i>inspiration graph</i> orchestrates how agents collaborate, retrieve, and iteratively reason — with the goal of generating scientific hypotheses that are not just plausible, but <b>genuinely novel</b>.</p>
-        <p>Beyond hypothesis generation, I work on <b>knowledge graph-enhanced reasoning &amp; retrieval</b> and <b>multimodal understanding</b> — most recently, teaching models to read comics the way humans do: panel by panel, in narrative order.</p>
-        <p>I'm currently seeking <b>2027 Fall PhD / direct-PhD opportunities</b>, as well as research collaborations and visiting internships in LLM agents, AI4Science, and reasoning.</p>
-      </div>
-      <aside class="facts reveal">
-        <div class="fact"><div class="k">Affiliation</div><div class="v">HZAU <small>· B.Eng. Artificial Intelligence</small></div></div>
-        <div class="fact"><div class="k">Rank</div><div class="v">Top 5% <small>· 2 / 52 in major</small></div></div>
-        <div class="fact"><div class="k">GPA</div><div class="v">3.72 <small>/ 4.0</small></div></div>
-        <div class="fact"><div class="k">Seeking</div><div class="v">PhD <small>· 2027 Fall</small></div></div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ================= RESEARCH ================= -->
-<section class="block" id="research" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx">§02</span><h2>Research</h2>
-      <span class="note">WHAT I THINK ABOUT</span>
-    </div>
-    <div class="res-list">
-      <div class="res reveal">
-        <span class="no">R·1</span>
-        <h3>LLM-based Multi-Agent Systems</h3>
-        <p>How should a society of language-model agents be structured so that debate, division of labor, and iterative critique compound into discoveries none of them could reach alone?</p>
-      </div>
-      <div class="res reveal">
-        <span class="no">R·2</span>
-        <h3>Automated Scientific Discovery</h3>
-        <p>Modeling the "spark" of research as a fine-grained inspiration graph — linking papers, concepts, and methods — so hypothesis generation becomes a navigable, structured process rather than a lucky guess.</p>
-      </div>
-      <div class="res reveal">
-        <span class="no">R·3</span>
-        <h3>Knowledge Graphs &amp; Retrieval-Augmented Reasoning</h3>
-        <p>Grounding LLM reasoning in structured knowledge: graph-enhanced retrieval, link prediction, and reasoning paths that stay faithful to evidence.</p>
-      </div>
-      <div class="res reveal">
-        <span class="no">R·4</span>
-        <h3>Multimodal Understanding</h3>
-        <p>Structured reasoning over images and text together — from comic narrative order to scientific figures — where layout and sequence carry the meaning.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PUBLICATIONS ================= -->
-<section class="block" id="publications" style="background:var(--paper-2)">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx">§03</span><h2>Publications</h2>
-      <span class="note">WHAT I'VE WRITTEN</span>
-    </div>
-
-    <article class="pub reveal">
-      <div class="meta">
-        <span class="chip venue">ECML-PKDD</span>
-        <span class="chip tier">CCF-B</span>
-        <span class="chip status">UNDER REVIEW</span>
-      </div>
-      <h3>FIG-MAC: Fine-grained Inspiration Graph Empowered Multi-Agent Collaboration for Automated Scientific Discovery</h3>
-      <p>A multi-agent framework in which a fine-grained inspiration graph orchestrates collaboration, retrieval, and iterative reasoning to generate novel scientific hypotheses.</p>
-      <div class="links">
-        <a href="https://github.com/SiyuanChenToDo/FIG-MAC-Fine-grained-Inspiration-Graph-Empowered-Multi-Agent-Collaboration-for-Automated-Scientific" target="_blank" rel="noopener">CODE →</a>
-      </div>
-    </article>
-
-    <article class="pub reveal">
-      <div class="meta">
-        <span class="chip venue">EMNLP</span>
-        <span class="chip tier">CCF-B</span>
-        <span class="chip status">UNDER REVIEW</span>
-      </div>
-      <h3>Knowledge Graph-enhanced Agent Framework for Scientific Discovery in Bioinformatics</h3>
-      <p>A knowledge-graph-grounded agent system that supports scientific discovery workflows in bioinformatics, keeping generated hypotheses anchored to structured biological knowledge.</p>
-    </article>
-
-    <article class="pub reveal">
-      <div class="meta">
-        <span class="chip venue">NLPCC</span>
-        <span class="chip tier">CCF-C</span>
-        <span class="chip status">UNDER REVIEW</span>
-      </div>
-      <h3>Reading Between the Panels: Structured Multimodal Reasoning for Comic Narrative Understanding</h3>
-      <p>Structured multimodal reasoning that recovers comic reading order and narrative flow — teaching models to follow a story across panels the way human readers do.</p>
-      <div class="links">
-        <a href="https://github.com/SiyuanChenToDo/Reading-Between-the-Panels-Structured-Multimodal-Reasoning-for-Comic-Narrative-Understanding" target="_blank" rel="noopener">CODE →</a>
-      </div>
-    </article>
-
-    <div class="pub-note reveal">📌 MANUSCRIPTS &amp; FULL CODE WILL BE RELEASED UPON ACCEPTANCE.</div>
-  </div>
-</section>
-
-<!-- ================= PROJECTS ================= -->
-<section class="block" id="projects">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx">§04</span><h2>Projects</h2>
-      <span class="note">WHAT I'VE BUILT</span>
-    </div>
-    <div class="proj-grid">
-      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/FIG-MAC-Fine-grained-Inspiration-Graph-Empowered-Multi-Agent-Collaboration-for-Automated-Scientific" target="_blank" rel="noopener">
-        <div class="k">Multi-Agent · Python</div>
-        <h3>FIG-MAC</h3>
-        <p>Inspiration-graph-empowered multi-agent collaboration for automated scientific hypothesis generation.</p>
-        <div class="go">VIEW ON GITHUB →</div>
-      </a>
-      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/Reading-Between-the-Panels-Structured-Multimodal-Reasoning-for-Comic-Narrative-Understanding" target="_blank" rel="noopener">
-        <div class="k">Multimodal · Python</div>
-        <h3>Reading Between the Panels</h3>
-        <p>Structured multimodal reasoning for comic narrative understanding and reading-order recovery.</p>
-        <div class="go">VIEW ON GITHUB →</div>
-      </a>
-      <a class="proj reveal" href="https://github.com/SiyuanChenToDo/Human-Evaluation-Website" target="_blank" rel="noopener">
-        <div class="k">Web · HTML</div>
-        <h3>Human Evaluation Website</h3>
-        <p>A web platform for running human evaluation studies on model outputs.</p>
-        <div class="go">VIEW ON GITHUB →</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= BEYOND ================= -->
-<section class="block beyond" id="beyond">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="idx">§05</span><h2>Beyond Research</h2>
-      <span class="note">WHO I AM OFF-DUTY</span>
-    </div>
-    <div class="beyond-grid reveal">
-      <div class="hob"><div class="ic">🏀</div><div class="t">Basketball</div><div class="d">ON THE COURT</div></div>
-      <div class="hob"><div class="ic">📷</div><div class="t">Photography</div><div class="d">THROUGH THE LENS</div></div>
-      <div class="hob"><div class="ic">📖</div><div class="t">Reading</div><div class="d">PAGE BY PAGE</div></div>
-      <div class="hob"><div class="ic">✈️</div><div class="t">Travel</div><div class="d">ON THE ROAD</div></div>
-    </div>
-    <div class="soon reveal">THIS CORNER IS STILL BEING WRITTEN — MORE ABOUT MY LIFE OFF-DUTY COMING SOON.</div>
-  </div>
-</section>
-
-<!-- ================= CONTACT ================= -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <h2 class="reveal">Let's <em>do science</em> together.</h2>
-    <p class="sub reveal">Open to 2027 Fall PhD positions, research collaborations, and visiting internships in LLM agents, AI4Science, knowledge graphs, and reasoning. If any of this resonates — I'd love to hear from you.</p>
-    <div class="cta-row reveal">
-      <a class="btn" href="mailto:2637427015@qq.com">EMAIL ME</a>
-      <a class="btn ghost" href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener">GITHUB</a>
-    </div>
-  </div>
-  <footer>
-    <span>© 2026 SIYUAN CHEN · 陈思远</span>
-    <span>BUILT WITH CURIOSITY · <a href="#top">BACK TO TOP ↑</a></span>
-  </footer>
-</section>
-
-<script>
-/* ============ Inspiration-graph hero canvas ============ */
-(function(){
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cv = document.getElementById('graph');
-  const ctx = cv.getContext('2d');
-  const LABELS = ['Multi-Agent Systems','Inspiration Graph','AI4Science','Knowledge Graph','RAG','Hypothesis','Reasoning','Retrieval','Multimodal','Discovery','Debate','Evidence'];
-  let W,H,nodes=[],mouse={x:-1e4,y:-1e4},t=0,DPR=Math.min(devicePixelRatio||1,2);
-
-  function resize(){
-    W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = W*DPR; cv.height = H*DPR;
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-  }
-  function init(){
-    resize();
-    nodes = LABELS.map((label,i)=>{
-      const a = (i/LABELS.length)*Math.PI*2;
-      return {
-        label,
-        x: W*(0.5+0.36*Math.cos(a)) + (Math.random()-0.5)*W*0.12,
-        y: H*(0.5+0.34*Math.sin(a)) + (Math.random()-0.5)*H*0.14,
-        vx:(Math.random()-0.5)*0.22, vy:(Math.random()-0.5)*0.22,
-        r: 2.2+Math.random()*2.2
-      };
-    });
-  }
-  const LINK = 190;
-  function step(){
-    t += 0.008;
-    ctx.clearRect(0,0,W,H);
-    for(const n of nodes){
-      n.x += n.vx; n.y += n.vy;
-      if(n.x<40||n.x>W-40) n.vx*=-1;
-      if(n.y<40||n.y>H-40) n.vy*=-1;
-      const dx=n.x-mouse.x, dy=n.y-mouse.y, d2=dx*dx+dy*dy;
-      if(d2<120*120){ const d=Math.sqrt(d2)||1; n.x+=dx/d*0.6; n.y+=dy/d*0.6; }
-    }
-    /* edges */
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const a=nodes[i],b=nodes[j];
-        const dx=a.x-b.x, dy=a.y-b.y, d=Math.hypot(dx,dy);
-        if(d<LINK){
-          const o=(1-d/LINK)*0.5;
-          ctx.strokeStyle=`rgba(201,168,106,${o*0.55})`;
-          ctx.lineWidth=1;
-          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-          /* a travelling "hypothesis" pulse on one edge at a time */
-          if(((i*31+j*17)%23)===Math.floor(t*4)%23){
-            const p=(t*1.6)%1;
-            const px=a.x+(b.x-a.x)*p, py=a.y+(b.y-a.y)*p;
-            ctx.fillStyle='rgba(201,168,106,.9)';
-            ctx.beginPath();ctx.arc(px,py,2,0,7);ctx.fill();
-          }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陈思远 · Siyuan Chen — 线索板</title>
+  <meta name="description" content="陈思远：一个把生活当案子办的观察者。白天教机器提出科学猜想，其余时间收集世界的证据。">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
       }
     }
-    /* nodes + labels */
-    ctx.font='10px "IBM Plex Mono",monospace';
-    for(const n of nodes){
-      const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*5);
-      g.addColorStop(0,'rgba(201,168,106,.5)');g.addColorStop(1,'rgba(201,168,106,0)');
-      ctx.fillStyle=g;ctx.beginPath();ctx.arc(n.x,n.y,n.r*5,0,7);ctx.fill();
-      ctx.fillStyle='#C9A86A';ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,7);ctx.fill();
-      ctx.fillStyle='rgba(237,230,214,.55)';
-      ctx.fillText(n.label.toUpperCase(), n.x+10, n.y+4);
-    }
-    if(!reduce) requestAnimationFrame(step);
-  }
-  addEventListener('resize', ()=>{init(); if(reduce) step();});
-  cv.parentElement.addEventListener('mousemove', e=>{
-    const r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;
-  });
-  cv.parentElement.addEventListener('mouseleave', ()=>{mouse.x=-1e4;mouse.y=-1e4;});
-  init(); step();
-})();
+  </script>
+</head>
+<body>
+  <!-- Three.js 氛围层（失败静默降级） -->
+  <canvas id="bg3d" aria-hidden="true"></canvas>
 
-/* ============ scroll reveal ============ */
-(function(){
-  const els=document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('on'));return;}
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('on'); io.unobserve(en.target);} });
-  },{threshold:.12});
-  els.forEach(e=>io.observe(e));
-})();
-</script>
+  <!-- 顶部固定导航条 -->
+  <nav id="topnav">
+    <div class="nav-inner">
+      <a class="nav-name" href="#top">陈思远 <span>/ Siyuan Chen</span></a>
+      <ul class="nav-links">
+        <li><a href="#board-section">线索板</a></li>
+        <li><a href="#life">生活切片</a></li>
+        <li><a href="#contact-anchor">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero 区 -->
+  <header class="hero" id="top">
+    <p class="hero-case">案件编号 NO.2026-SY · 进行中</p>
+    <h1>陈思远</h1>
+    <p class="hero-sub">一个把生活当案子办的观察者</p>
+    <p class="hero-bio">白天教机器提出科学猜想，<br class="br-wide">其余时间用相机、跑鞋和车票收集世界的证据。</p>
+    <div class="hero-btns">
+      <a class="btn" href="mailto:2637427015@qq.com">邮箱</a>
+      <a class="btn" href="#">简历 PDF</a>
+      <a class="btn btn-minor" href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener" title="GitHub（整理中）">GitHub</a>
+    </div>
+  </header>
+
+  <!-- 线索板主区域 -->
+  <main class="board-wrap" id="board-section">
+    <h2 class="section-title">线索板 · The Clue Board</h2>
+    <p class="section-hint">拖动卡片理清脉络，点击卡片打开案卷</p>
+
+    <div class="board" id="board">
+      <svg id="threads" aria-hidden="true"></svg>
+
+      <!-- 档案卡：关于我 -->
+      <article class="card card-file" id="card-about" style="--rot:-2deg; left:3%; top:3%; width:270px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">档案 · PROFILE</span>
+        <h3>关于我</h3>
+        <img class="card-photo" src="assets/photo.jpg" alt="陈思远的照片" draggable="false">
+        <ul>
+          <li>「把生活当案子办的观察者」</li>
+          <li>现居：武汉 ⇄ 上海</li>
+          <li>特征：随身带相机，咖啡因浓度偏高</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" title="按住旋转（Shift 吸附 15°）" aria-hidden="true"></span>
+      </article>
+
+      <!-- 科研卡 1：FIG-MAC -->
+      <article class="card card-research" id="card-figmac" style="--rot:1.6deg; left:31%; top:2%; width:310px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">科研 · NLPCC Oral (CCF-C) · 共一第一</span>
+        <h3>FIG-MAC</h3>
+        <p class="card-lede">多智能体协作的自动化科学猜想生成</p>
+        <img class="card-thumb" src="assets/figmac-framework.jpg" alt="FIG-MAC 框架缩略图" draggable="false">
+        <ul>
+          <li>细粒度灵感图谱 + 混合推理</li>
+          <li>七角色多智能体闭环</li>
+          <li>灵感源多样性 <strong>+26.9%</strong></li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 科研卡 2：油菜基因大模型 -->
+      <article class="card card-research" id="card-rapeseed" style="--rot:-1.2deg; left:64%; top:4%; width:310px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">科研 · 省大创结题优秀 · 第一负责人</span>
+        <h3>油菜基因大模型</h3>
+        <p class="card-lede">EMNLP Findings (CCF-B)，转投 ACL 2027</p>
+        <img class="card-thumb" src="assets/bnhypo-framework.jpg" alt="油菜基因大模型框架缩略图" draggable="false">
+        <ul>
+          <li>BERT 生物知识图谱</li>
+          <li>零训练启发式推理</li>
+          <li>对抗迭代多智能体闭环</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 科研卡 3：MemeScope -->
+      <article class="card card-research" id="card-memescope" style="--rot:2deg; left:6%; top:45%; width:310px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">科研 · EMNLP Main (CCF-B) · 第一负责人</span>
+        <h3>MemeScope</h3>
+        <p class="card-lede">表情包语用推理探测与因果定位</p>
+        <img class="card-thumb" src="assets/memescope-framework.jpg" alt="MemeScope 框架缩略图" draggable="false">
+        <ul>
+          <li>1781 条样本、8 类语用机制</li>
+          <li>逐层探测 + 隐藏态修补</li>
+          <li>发现「语用漂移」现象</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 实习卡 -->
+      <article class="card card-intern" id="card-internship" style="--rot:-1.8deg; left:40%; top:42%; width:310px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">实习 · 2026.6 – 2026.9</span>
+        <h3>上海人工智能金融学院</h3>
+        <p class="card-lede">科研实习生</p>
+        <ul>
+          <li>图上自进化 + Agentic RL</li>
+          <li>NTU 课题组：Agent 创造力评测</li>
+          <li>预计投稿 ICLR 2027</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 科研卡 4：其他 -->
+      <article class="card card-research" id="card-other" style="--rot:1.4deg; left:73%; top:44%; width:280px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">科研 · 更多线索</span>
+        <h3>其他研究</h3>
+        <img class="card-thumb" src="assets/robot-dog.jpg" alt="四足机器人现场照片" draggable="false">
+        <ul>
+          <li>漫画阅读理解：33.26% → <strong>51.72%</strong></li>
+          <li>四足机器人巡检：全国一等奖</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 荣誉卡 -->
+      <article class="card card-honor" id="card-honors" style="--rot:-1.5deg; left:12%; top:76%; width:320px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag">荣誉 · HONORS</span>
+        <h3>主要荣誉</h3>
+        <ul>
+          <li>国家奖学金</li>
+          <li>睿抗机器人开发者大赛 全国一等奖</li>
+          <li>美国大学生数学建模竞赛 国际二等奖</li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+
+      <!-- 联系卡 -->
+      <article class="card card-contact" id="card-contact" style="--rot:2.2deg; left:56%; top:76%; width:310px;">
+        <span class="pin" aria-hidden="true"></span>
+        <span class="card-tag" id="contact-anchor">联络线人 · CONTACT</span>
+        <h3>找到我</h3>
+        <ul class="contact-list">
+          <li>邮箱：<a href="mailto:2637427015@qq.com">2637427015@qq.com</a></li>
+        </ul>
+        <p class="card-more">点击展开案卷 →</p>
+        <span class="rot-handle" aria-hidden="true"></span>
+      </article>
+    </div>
+  </main>
+
+  <!-- 生活切片区 -->
+  <section class="life" id="life">
+    <h2 class="section-title">生活切片 / Life Slices</h2>
+    <p class="section-hint">持续更新中… 点击拍立得查看这条线索</p>
+    <div class="polaroid-grid">
+      <figure class="polaroid" data-dossier="life-camera" style="--rot:-2.5deg;">
+        <div class="polaroid-img">📷</div>
+        <figcaption>摄影 · 待补充</figcaption>
+      </figure>
+      <figure class="polaroid" data-dossier="life-run" style="--rot:1.8deg;">
+        <div class="polaroid-img">🏃</div>
+        <figcaption>运动 · 待补充</figcaption>
+      </figure>
+      <figure class="polaroid" data-dossier="life-books" style="--rot:2.2deg;">
+        <div class="polaroid-img">📖</div>
+        <figcaption>阅读 · 待补充</figcaption>
+      </figure>
+      <a class="polaroid polaroid-link" href="#travel-map" style="--rot:-1.2deg;">
+        <div class="polaroid-img">🗺️</div>
+        <figcaption>旅行 · 查看足迹地图 ↓</figcaption>
+      </a>
+      <a class="polaroid polaroid-link" href="#radio" style="--rot:-2deg;">
+        <div class="polaroid-img">📻</div>
+        <figcaption>音乐 · 深夜电台 ↓</figcaption>
+      </a>
+    </div>
+
+    <div class="life-modules">
+      <!-- 旅行线索地图 -->
+      <div class="module-map">
+        <h3 class="module-title">足迹地图 · CLUE MAP</h3>
+        <p class="module-hint">点击红色图钉，翻阅该城市的案卷</p>
+        <div class="map-frame">
+          <div class="map-scroll" id="travel-map">
+            <p class="map-fallback">地图绘制中…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 深夜电台 -->
+      <div class="module-radio" id="radio">
+        <h3 class="module-title">深夜电台 · MIDNIGHT FM</h3>
+        <p class="module-hint">把 mp3 丢进 assets/music/ 即可上链</p>
+        <div class="radio-set">
+          <div class="radio-face">
+            <div class="vinyl" aria-hidden="true">
+              <div class="vinyl-label">深夜电台<br>FM-SY</div>
+            </div>
+            <div class="radio-side">
+              <p class="radio-track" id="radio-track">— 未在播放 —</p>
+              <p class="radio-note" id="radio-note"></p>
+              <div class="vol-bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="radio-progress" id="radio-progress">
+                <div class="progress-fill" id="radio-fill"></div>
+              </div>
+              <p class="radio-time" id="radio-time">00:00 / 00:00</p>
+              <div class="radio-btns">
+                <button id="radio-prev" type="button" aria-label="上一首">⏮</button>
+                <button id="radio-play" type="button" aria-label="播放">▶</button>
+                <button id="radio-next" type="button" aria-label="下一首">⏭</button>
+              </div>
+              <div class="radio-knobs" aria-hidden="true">
+                <span class="knob"></span><span class="knob"></span>
+              </div>
+            </div>
+          </div>
+          <ul class="radio-list" id="radio-list"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <p>© 2026 Siyuan Chen · Built with Three.js &amp; 一杯咖啡</p>
+  </footer>
+
+  <script type="module" src="js/bg3d.js"></script>
+  <script type="module" src="js/bgm.js"></script>
+  <script type="module" src="js/map.js"></script>
+  <script type="module" src="js/radio.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
