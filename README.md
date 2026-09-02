@@ -15,16 +15,18 @@ homepage/
 │   ├── main.js     # 红线绘制、卡片拖拽/旋转/置顶、点击判定、debug 参数
 │   ├── dossier.js  # 【数据核心】DOSSIERS 文案对象 + 案卷面板控制器
 │   ├── map.js      # 旅行线索地图（SVG 渲染 + 城市图钉 + 航线虚线）
-│   ├── radio.js    # 深夜电台播放器（<audio> + 缺失曲目置灰跳过）
 │   ├── bgm.js      # WebAudio 生成式背景音乐（无音频文件，默认关、点击开）
 │   ├── bg3d.js     # Three.js 尘埃/雾/深处红线（importmap CDN，失败静默降级）
 │   └── data/
 │       ├── china-geo.json  # 中国省级 GeoJSON（DataV 下载的本地副本，568KB）
-│       ├── travel.js       # 城市列表 + 航线顺序（增删城市/改路线改这里）
-│       └── playlist.js     # 电台歌单（加歌改这里）
+│       └── travel.js       # 城市列表 + 航线顺序（增删城市/改路线改这里）
 ├── assets/
-│   └── music/               # 用户放 mp3 的目录（命名规则：歌名-歌手.mp3）
-├── assets/
+│   └── photos/                # 生活/旅行照片（PIL 压缩：最长边 ≤1400px, jpg q80）
+│   │   ├── shanghai-1~3.jpg   #   → travel-shanghai 案卷（街景/东方明珠/和平饭店）
+│   │   ├── wuhan-1.jpg        #   → travel-wuhan 案卷（光谷夜景）
+│   │   ├── dali-1.jpg         #   → travel-dali 案卷（洱海双廊）
+│   │   ├── me-1.jpg, me-2.jpg #   → card-about 案卷（本人生活照）
+│   │   └── cam-01~09.jpg      #   → life-camera 摄影案卷（cam-01 兼作拍立得封面）
 │   └── photo.jpg              # 档案卡照片
 │   └── figmac-framework.jpg   # FIG-MAC Fig.2 框架图（面板 L1 + 板卡缩略图）
 │   └── figmac-pipeline.jpg    # FIG-MAC Fig.1 ASHG 流程图（面板 L1）
@@ -38,6 +40,17 @@ homepage/
 ```
 
 Three.js 通过 importmap 从 CDN 引入（`three@0.160.0`，unpkg，已 pin 版本），无需 npm。
+
+## 照片管理（assets/photos/）
+
+- 所有照片经 PIL 压缩（最长边 ≤1400px、JPEG q80、单张 ≤350KB），均带 `loading="lazy"`
+- **换/加照片**：把压缩后的 jpg 放进 `assets/photos/`，然后改 `js/dossier.js`
+  对应条目里的 `<img class="zoomable" src="assets/photos/xxx.jpg">` 即可；
+  城市案卷在 `travel-<id>` 条目，摄影集在 `life-camera` 条目，本人照在 `card-about` 条目
+- 案卷里所有 `img.zoomable` 照片支持**点击放大**（lightbox 全屏查看，
+  点击任意处或 ESC 关闭；ESC 优先关大图再关案卷）
+- 拍立得封面：`index.html` 里把 `.polaroid-img` 占位 div 换成
+  `<img class="polaroid-photo" src="...">`（目前仅摄影拍立得用了真实照片）
 
 ## 案卷面板：层级设计
 
@@ -75,7 +88,7 @@ Three.js 通过 importmap 从 CDN 引入（`three@0.160.0`，unpkg，已 pin 版
 - 导航滚动加深、平滑锚点
 - 移动端（<768px）：卡片纵向流式，隐藏红线/旋转手柄，点按照常开面板（面板全屏）
 
-## 生活切片：两个交互模块
+## 生活切片：足迹地图模块
 
 ### 足迹地图 · CLUE MAP
 
@@ -88,16 +101,6 @@ Three.js 通过 importmap 从 CDN 引入（`three@0.160.0`，unpkg，已 pin 版
   `{ id, name, lng, lat }`，`ROUTE` 数组调整连接顺序；城市文案在
   `js/dossier.js` 里加 `travel-<id>` 条目
 
-### 深夜电台 · MIDNIGHT FM
-
-- 老式黑胶唱机样式（纯 CSS）：木纹机身、转盘（播放时旋转）、音量柱跳动、装饰旋钮
-- 播放/暂停、上一首/下一首、进度条点击拖动 seek、曲目列表点击切歌
-- **音频缺失的曲目自动置灰显示「音频待补充」，连播时自动跳过**（当前无 mp3，全灰属正常状态）
-- **加歌方法**：
-  1. mp3 丢进 `assets/music/`，文件名规则：`歌名-歌手.mp3`（如 `成都-赵雷.mp3`）
-  2. `js/data/playlist.js` 里加一条 `{ title, artist, src, note }`；
-     `src` 留空即为占位（置灰）
-
 ## 背景音乐（WebAudio 生成式）
 
 - `js/bgm.js`：纯 WebAudio 合成的循环 lo-fi/ambient 氛围音乐，**不依赖任何音频文件**
@@ -107,7 +110,7 @@ Three.js 通过 importmap 从 CDN 引入（`three@0.160.0`，unpkg，已 pin 版
 - 浏览器自动播放策略：**默认关闭**，点击右下角「♪ 背景音乐」浮动按钮才创建/恢复
   AudioContext（在点击手势内调用 `resume`）；再点停止（淡出后挂起上下文）
 - 播放中按钮反馈：迷你黑胶图标旋转 + 红色脉动光圈
-- AudioContext 不可用时按钮静默不出现，不影响其他模块；与深夜电台（本地 mp3）互不冲突
+- AudioContext 不可用时按钮静默不出现，不影响其他模块
 
 ## 调试参数（URL query）
 
@@ -148,10 +151,8 @@ git push -u origin main
 ## 待用户补充
 
 - [ ] 简历 PDF：Hero 按钮现为 `#` 占位（可放 `assets/resume.pdf` 后改链接）
-- [ ] 生活切片 3 张拍立得（摄影/运动/阅读）：替换 `index.html` 里 `.polaroid-img` 为 `<img>`
-- [ ] 电台 mp3：丢进 `assets/music/`，命名 `歌名-歌手.mp3`
-- [ ] 9 个城市案卷的描述与照片（`js/dossier.js` 中 `travel-*` 条目）
-- [ ] 各爱好案卷（`js/dossier.js` 中 `life-*` 条目）：大图占位 + 正文 TODO
-- [ ] 「关于我」案卷里的武汉咖啡地图 TODO
-- [ ] 「联络线人」案卷里的社交链接 TODO
+- [ ] 运动/阅读/音乐 3 张拍立得仍是占位（无合适素材），替换方式见「照片管理」
+- [ ] 城市案卷空缺位：大理/武汉各剩 2 个占位框，长春/郑州/长沙/丽江/杭州/深圳仍为纯占位
+- [ ] 各爱好案卷（`js/dossier.js` 中 `life-*` 条目）的大图与正文
+- [ ] 「联络线人」案卷里可补充社交链接
 - [ ] 荣誉案卷如需补充奖项

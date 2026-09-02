@@ -18,8 +18,11 @@ export const DOSSIERS = {
         <li>日常装备：相机、跑鞋、降噪耳机、一杯去冰美式</li>
         <li>兴趣清单：摄影 / 跑步 / 旅行 / 阅读 / 音乐（详见「生活切片」）</li>
       </ul>
-      <p class="todo-note">TODO：这里打算写一份「武汉咖啡地图」私藏清单——
-      用户自行补充常去的店和推荐理由。</p>
+      <div class="dossier-img-grid two">
+        <img class="zoomable" src="assets/photos/me-1.jpg" alt="与小狗合影" loading="lazy">
+        <img class="zoomable" src="assets/photos/me-2.jpg" alt="民族服饰写真" loading="lazy">
+      </div>
+      <p class="fig-cap">证物 · 左：遭遇一只无法拒绝的小狗；右：一次民族服饰体验</p>
     `,
   },
 
@@ -305,7 +308,6 @@ export const DOSSIERS = {
       以下摘录几页关键笔录：</p>
       <ul>
         <li><strong>国家奖学金</strong>（Top 1%）</li>
-        <li>微积分 A2：全院 388 人中<strong>唯一卷面满分</strong></li>
         <li>睿抗机器人开发者大赛（RAICOM）全国总决赛 <strong>一等奖</strong>（四足机器人巡检系统）</li>
         <li>中国机器人及人工智能大赛 省一等奖</li>
         <li>中国高校智能机器人创意大赛 全国三等奖</li>
@@ -316,7 +318,6 @@ export const DOSSIERS = {
       </ul>
       <img class="dossier-fig" src="assets/raicom-medal.jpg" alt="睿抗机器人大赛全国一等奖奖牌" loading="lazy">
       <p class="fig-cap">证物 · 2025 睿抗机器人开发者大赛全国总决赛一等奖奖牌</p>
-      <p class="todo-note">TODO：如需补充更多奖项/时间，直接改 <code>js/dossier.js</code> 里这一条。</p>
     `,
   },
 
@@ -329,8 +330,6 @@ export const DOSSIERS = {
       <ul>
         <li>邮箱：<a href="mailto:2637427015@qq.com">2637427015@qq.com</a></li>
       </ul>
-      <p class="todo-note">TODO：社交链接占位——知乎 / 即刻 / 微信公众号等，
-      想放哪个就在 <code>js/dossier.js</code> 这里加一行。</p>
     `,
   },
 
@@ -348,7 +347,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：写下在长春的故事，并替换上面的照片占位。</p>
     `,
   },
   'travel-zhengzhou': {
@@ -362,7 +360,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充郑州记忆与照片。</p>
     `,
   },
   'travel-wuhan': {
@@ -372,11 +369,11 @@ export const DOSSIERS = {
       <p>此人的主要活动据点。江边的夜跑路线已被反复测绘，
       热干面摊位的出勤率高得不像话。</p>
       <div class="dossier-img-grid">
-        <div class="dossier-img-ph small">照片待补充</div>
+        <img class="zoomable" src="assets/photos/wuhan-1.jpg" alt="武汉光谷步行街夜景" loading="lazy">
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充武汉记忆与照片。</p>
+      <p class="fig-cap">证物 · 光谷步行街的夜，堂吉诃德雕像与酒吧街风车</p>
     `,
   },
   'travel-changsha': {
@@ -390,7 +387,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充长沙记忆与照片。</p>
     `,
   },
   'travel-dali': {
@@ -400,11 +396,11 @@ export const DOSSIERS = {
       <p>洱海边的风比 debug 更能清空缓存。当事人在此停留时间远超计划，
       苍山下拍到大量「看起来一样但其实不一样」的云。</p>
       <div class="dossier-img-grid">
-        <div class="dossier-img-ph small">照片待补充</div>
+        <img class="zoomable" src="assets/photos/dali-1.jpg" alt="大理洱海与双廊古镇" loading="lazy">
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充大理记忆与照片。</p>
+      <p class="fig-cap">证物 · 洱海东岸眺望双廊，苍山云带触手可及</p>
     `,
   },
   'travel-lijiang': {
@@ -418,7 +414,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充丽江记忆与照片。</p>
     `,
   },
   'travel-hangzhou': {
@@ -432,7 +427,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充杭州记忆与照片。</p>
     `,
   },
   'travel-shanghai': {
@@ -442,11 +436,11 @@ export const DOSSIERS = {
       <p>第二据点。咖啡因摄入量在此达到峰值，
       滨江步道的夜景快门次数位居全案之首。</p>
       <div class="dossier-img-grid">
-        <div class="dossier-img-ph small">照片待补充</div>
-        <div class="dossier-img-ph small">照片待补充</div>
-        <div class="dossier-img-ph small">照片待补充</div>
+        <img class="zoomable" src="assets/photos/shanghai-1.jpg" alt="上海历史建筑街景" loading="lazy">
+        <img class="zoomable" src="assets/photos/shanghai-2.jpg" alt="东方明珠晚霞" loading="lazy">
+        <img class="zoomable" src="assets/photos/shanghai-3.jpg" alt="和平饭店夜景" loading="lazy">
       </div>
-      <p class="todo-note">TODO：补充上海记忆与照片。</p>
+      <p class="fig-cap">证物 · 街角老公寓 / 东方明珠的晚霞 / 和平饭店的夜</p>
     `,
   },
   'travel-shenzhen': {
@@ -460,7 +454,6 @@ export const DOSSIERS = {
         <div class="dossier-img-ph small">照片待补充</div>
         <div class="dossier-img-ph small">照片待补充</div>
       </div>
-      <p class="todo-note">TODO：补充深圳记忆与照片。</p>
     `,
   },
 
@@ -469,9 +462,20 @@ export const DOSSIERS = {
     title: '线索 · 镜头后面',
     subtitle: '摄影',
     body: `
-      <div class="dossier-img-ph">📷<br>照片待补充</div>
-      <p>当事人声称「光比人诚实」。相机快门数异常偏高，底片去向不明。</p>
-      <p class="todo-note">TODO：换成真实照片 + 一段你自己的摄影笔记（器材、题材、常去的扫街路线）。</p>
+      <p>当事人声称「光比人诚实」。相机快门数异常偏高，底片去向不明。
+      以下是从存储卡里恢复的部分证物（点击可放大细查）：</p>
+      <div class="dossier-img-grid">
+        <img class="zoomable" src="assets/photos/cam-01.jpg" alt="夜樱" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-02.jpg" alt="蓝调时刻的拱桥" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-03.jpg" alt="江景黄昏" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-04.jpg" alt="城市夜景与斜拉桥" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-05.jpg" alt="江上月光" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-06.jpg" alt="滨江步道" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-07.jpg" alt="樱花树下的许愿牌" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-08.jpg" alt="恩施土司城南门" loading="lazy">
+        <img class="zoomable" src="assets/photos/cam-09.jpg" alt="花市" loading="lazy">
+      </div>
+      <p class="fig-cap">证物 · 夜樱 / 江与桥 / 花与愿望 / 一座土司城</p>
     `,
   },
   'life-run': {
@@ -481,7 +485,6 @@ export const DOSSIERS = {
       <div class="dossier-img-ph">👟<br>照片待补充</div>
       <p>鞋底磨损均匀，步频稳定。据线人报：此人常在深夜出门跑步，
       疑似借配速整理白天想不通的问题。</p>
-      <p class="todo-note">TODO：补充你的跑步故事——跑量、比赛、常跑的路线。</p>
     `,
   },
   'life-books': {
@@ -491,7 +494,15 @@ export const DOSSIERS = {
       <div class="dossier-img-ph">📚<br>照片待补充</div>
       <p>书堆呈不稳定结构，最上面一本停在第 47 页，书签是一张咖啡小票。
       书目横跨科幻、科普与侦探小说——口味可疑地杂。</p>
-      <p class="todo-note">TODO：补充你的书单和正在读的一本。</p>
+    `,
+  },
+  'life-music': {
+    title: '线索 · 耳机分你一半',
+    subtitle: '音乐',
+    body: `
+      <div class="dossier-img-ph">🎧<br>照片待补充</div>
+      <p>歌单分析：后摇与 citypop 各占一半。规律明显——写东西时听后摇，
+      发呆时听另一半。</p>
     `,
   },
 };
@@ -604,9 +615,42 @@ function buildDom() {
     }
   });
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && backdropEl.classList.contains('open')) closeDossier();
+    if (e.key !== 'Escape') return;
+    // 先关大图，再关案卷
+    if (lightboxEl && lightboxEl.classList.contains('open')) { closeLightbox(); return; }
+    if (backdropEl.classList.contains('open')) closeDossier();
   });
 }
+
+/* ---------- Lightbox：案卷内照片点击放大 ---------- */
+let lightboxEl = null;
+
+function openLightbox(src, alt) {
+  if (!lightboxEl) {
+    lightboxEl = document.createElement('div');
+    lightboxEl.id = 'lightbox';
+    lightboxEl.setAttribute('role', 'dialog');
+    lightboxEl.setAttribute('aria-label', '照片放大查看');
+    lightboxEl.innerHTML =
+      '<img alt=""><span class="lightbox-hint">点击任意处或按 ESC 关闭</span>';
+    lightboxEl.addEventListener('click', closeLightbox);
+    document.body.appendChild(lightboxEl);
+  }
+  const img = lightboxEl.querySelector('img');
+  img.src = src;
+  img.alt = alt || '';
+  lightboxEl.classList.add('open');
+}
+
+function closeLightbox() {
+  if (lightboxEl) lightboxEl.classList.remove('open');
+}
+
+// 案卷内带 .zoomable 的照片均可点击放大
+document.addEventListener('click', (e) => {
+  const img = e.target.closest('#dossier-panel img.zoomable');
+  if (img) openLightbox(img.src, img.alt);
+});
 
 /** 打开案卷。path 形如 "card-figmac" 或 "card-figmac/fig" */
 export function openDossier(path) {

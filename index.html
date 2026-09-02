@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>陈思远 · Siyuan Chen — 线索板</title>
-  <meta name="description" content="陈思远：一个把生活当案子办的观察者。白天研究科学问题，其余时间收集世界的证据。">
+  <meta name="description" content="陈思远：一个把生活当案子办的观察者。白天教机器提出科学猜想，其余时间收集世界的证据。">
   <link rel="stylesheet" href="css/style.css">
   <script type="importmap">
     {
@@ -35,11 +35,11 @@
     <p class="hero-case">案件编号 NO.2026-SY · 进行中</p>
     <h1>陈思远</h1>
     <p class="hero-sub">一个把生活当案子办的观察者</p>
-    <p class="hero-bio">白天教机器提出科学猜想，<br class="br-wide">其余时间用相机、跑鞋和车票收集世界的证据。</p>
+    <p class="hero-bio">白天研究科学问题，<br class="br-wide">其余时间用相机、跑鞋和车票收集世界的证据。</p>
     <div class="hero-btns">
       <a class="btn" href="mailto:2637427015@qq.com">邮箱</a>
       <a class="btn" href="#">简历 PDF</a>
-      <a class="btn btn-minor" href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener" title="GitHub（整理中）">GitHub</a>
+      <a class="btn" href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener" title="GitHub">GitHub</a>
     </div>
   </header>
 
@@ -177,8 +177,8 @@
     <p class="section-hint">持续更新中… 点击拍立得查看这条线索</p>
     <div class="polaroid-grid">
       <figure class="polaroid" data-dossier="life-camera" style="--rot:-2.5deg;">
-        <div class="polaroid-img">📷</div>
-        <figcaption>摄影 · 待补充</figcaption>
+        <img class="polaroid-photo" src="assets/photos/cam-01.jpg" alt="夜樱" loading="lazy">
+        <figcaption>摄影 · 镜头后面</figcaption>
       </figure>
       <figure class="polaroid" data-dossier="life-run" style="--rot:1.8deg;">
         <div class="polaroid-img">🏃</div>
@@ -192,10 +192,10 @@
         <div class="polaroid-img">🗺️</div>
         <figcaption>旅行 · 查看足迹地图 ↓</figcaption>
       </a>
-      <a class="polaroid polaroid-link" href="#radio" style="--rot:-2deg;">
-        <div class="polaroid-img">📻</div>
-        <figcaption>音乐 · 深夜电台 ↓</figcaption>
-      </a>
+      <figure class="polaroid" data-dossier="life-music" style="--rot:-2deg;">
+        <div class="polaroid-img">🎵</div>
+        <figcaption>音乐 · 待补充</figcaption>
+      </figure>
     </div>
 
     <div class="life-modules">
@@ -209,39 +209,6 @@
           </div>
         </div>
       </div>
-
-      <!-- 深夜电台 -->
-      <div class="module-radio" id="radio">
-        <h3 class="module-title">深夜电台 · MIDNIGHT FM</h3>
-        <p class="module-hint">把 mp3 丢进 assets/music/ 即可上链</p>
-        <div class="radio-set">
-          <div class="radio-face">
-            <div class="vinyl" aria-hidden="true">
-              <div class="vinyl-label">深夜电台<br>FM-SY</div>
-            </div>
-            <div class="radio-side">
-              <p class="radio-track" id="radio-track">— 未在播放 —</p>
-              <p class="radio-note" id="radio-note"></p>
-              <div class="vol-bars" aria-hidden="true">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <div class="radio-progress" id="radio-progress">
-                <div class="progress-fill" id="radio-fill"></div>
-              </div>
-              <p class="radio-time" id="radio-time">00:00 / 00:00</p>
-              <div class="radio-btns">
-                <button id="radio-prev" type="button" aria-label="上一首">⏮</button>
-                <button id="radio-play" type="button" aria-label="播放">▶</button>
-                <button id="radio-next" type="button" aria-label="下一首">⏭</button>
-              </div>
-              <div class="radio-knobs" aria-hidden="true">
-                <span class="knob"></span><span class="knob"></span>
-              </div>
-            </div>
-          </div>
-          <ul class="radio-list" id="radio-list"></ul>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -253,7 +220,6 @@
   <script type="module" src="js/bg3d.js"></script>
   <script type="module" src="js/bgm.js"></script>
   <script type="module" src="js/map.js"></script>
-  <script type="module" src="js/radio.js"></script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
