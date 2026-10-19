@@ -19,6 +19,8 @@ const LINKS = [
   ['card-rapeseed', 'card-honors'],
   ['card-memescope', 'card-honors'],
   ['card-internship', 'card-contact'],
+  ['card-about', 'card-opensource'],
+  ['card-opensource', 'card-contact'],
 ];
 
 const cardEls = [...document.querySelectorAll('#board .card')];

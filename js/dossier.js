@@ -14,6 +14,7 @@ export const DOSSIERS = {
       <p>陈思远，一个把生活当案子办的观察者。习惯在随身本子上记录线索：
       一束光的角度、一段对话的弦外之音、一双跑鞋的磨损程度。</p>
       <ul>
+        <li>学业：华中农业大学人工智能本科（2023.9 – 2027.6），已保研至华中科技大学攻读硕士（2027.9 入学）</li>
         <li>现居：武汉 ⇄ 上海，行踪随项目与季节移动</li>
         <li>日常装备：相机、跑鞋、降噪耳机、一杯去冰美式</li>
         <li>兴趣清单：摄影 / 跑步 / 旅行 / 阅读 / 音乐（详见「生活切片」）</li>
@@ -168,7 +169,7 @@ export const DOSSIERS = {
   /* ---------------- MemeScope ---------------- */
   'card-memescope': {
     title: 'MemeScope',
-    subtitle: 'EMNLP Main (CCF-B) · 第一负责人 · 表情包语用推理',
+    subtitle: 'EMNLP Main (CCF-B) · 二作 · 表情包语用推理',
     body: `
       <p><strong>案情：</strong>表情包的灵魂不在画面，而在「言外之意」。
       多模态大模型真的懂反讽、夸张、自嘲吗？还是只是背下了答案？</p>
@@ -264,36 +265,95 @@ export const DOSSIERS = {
 
   /* ---------------- 实习 ---------------- */
   'card-internship': {
-    title: '上海人工智能金融学院',
-    subtitle: '科研实习生 · 2026.6 – 2026.9',
+    title: '科研实习',
+    subtitle: 'NTU 课题组 · 上海人工智能金融学院 · 2026.5 – 2026.9',
     body: `
-      <p><strong>案情：</strong>大模型智能体能否像研究者一样「自我进化」？
-      带着这个问题加入上海人工智能金融学院做科研实习。</p>
-      <p><strong>两条线索：</strong>一条钻研图结构上的自进化与 Agentic RL；
-      另一条与 NTU 课题组合作，给智能体的「创造力」立 benchmark。</p>
+      <p><strong>案情：</strong>两个问题、两段实习：Agent 的创造力从哪来？
+      智能体能否像研究者一样在图上自我进化？</p>
+      <p><strong>两条线索：</strong>NTU 课题组负责给 Agent 创造力立 benchmark；
+      上海人工智能金融学院钻研图结构上的自进化与 Agentic RL。</p>
     `,
     children: [
       {
-        id: 'graphrl',
-        title: '图上自进化与 Agentic RL',
+        id: 'ntu',
+        title: 'NTU：Agent 创造力 Benchmark',
         body: `
-          <p>图上自进化（Self-improvement）+ 强化学习：
-          探索 Agent 在图推理任务中的<strong>自主优化与迭代提升</strong>——
-          把交互经验沉淀进图结构，再由 RL 信号驱动策略持续演化，
-          让智能体越用越聪明，而不是每次都从零开始。</p>
+          <p>2026.5 – 至今，在 NTU 课题组从事 Agent 创造力评测研究：</p>
+          <ul>
+            <li>提出 <strong>ACA</strong>（Agents Creating Agents）基准，从架构视角评估 Agent 创造力</li>
+            <li>将效用、模板相对新颖度与 token 成本统一为 <strong>Creativity 分数</strong></li>
+            <li>提出证据驱动的机制搜索方法 <strong>EGMS</strong>，利用失败的因果结构引导架构搜索</li>
+          </ul>
+          <p>held-out 效用较五个最强基线提升 <strong>6.4 个百分点</strong>，
+          Creativity 分数提升 <strong>0.153 – 0.272</strong>；预计投稿 <strong>ICLR 2027</strong>。</p>
         `,
       },
       {
-        id: 'ntu',
-        title: 'Agent 创造力 Benchmark',
+        id: 'graphrl',
+        title: '上海 AI 金融学院：自进化图 + Agentic RL',
         body: `
-          <p>在 NTU 课题组资助下担任 Lead，研究「智能体的创造力」这个玄学问题：</p>
+          <p>2026.6 – 2026.9，面向多跳问答中检索环境静态、终端奖励难以指导
+          中间检索决策的挑战，提出 <strong>SIG-R1</strong> 自进化图方法：</p>
           <ul>
-            <li><strong>Harness 能力构建：</strong>搭建可复现的创造力评测脚手架</li>
-            <li><strong>自进化机制：</strong>探索智能体在评测中自我提升的路径</li>
-            <li><strong>技能获取 → 创造力：</strong>量化技能积累对创造力提升的影响</li>
+            <li>步级局部强化学习 + 失败驱动的可搜索超图与索引自适应</li>
+            <li>将失败归因于策略 / 接地 / 路径 / 图结构四类成因</li>
+            <li>仅接纳通过引用级、实体归属与编辑后可检索性三重校验的语料编辑</li>
           </ul>
-          <p>成果预计投稿 <strong>ICLR 2027</strong>。</p>
+          <p>基于 Qwen3.5-9B 在 HotpotQA 上提升 <strong>12.0 个百分点</strong>，
+          预计投稿 <strong>ICLR 2027</strong>。</p>
+        `,
+      },
+    ],
+  },
+
+  /* ---------------- 开源贡献 ---------------- */
+  'card-opensource': {
+    title: '开源贡献',
+    subtitle: 'OPEN SOURCE · 过去一年 192 commits / 12 PRs',
+    body: `
+      <p><strong>案情：</strong>科研之外，把日常踩到的坑修回上游——
+      从大模型推理框架到科研 Agent 工具链，顺手给社区留下几行可复用的代码。</p>
+      <p><strong>年度档案：</strong>192 commits · 12 pull requests · 4 issues · <strong>3 PRs merged</strong>。</p>
+    `,
+    children: [
+      {
+        id: 'merged',
+        title: '已合并 PR',
+        body: `
+          <ul>
+            <li><a href="https://github.com/infiniflow/ragflow/pull/21114" target="_blank" rel="noopener">infiniflow/ragflow</a>（92.5k ⭐）——
+            让 harness 识别字符串前缀之外的 retryable errors</li>
+            <li><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/pull/471" target="_blank" rel="noopener">Auto-claude-code-research-in-sleep #471</a>——
+            只从 YAML frontmatter 解析 tool grants</li>
+            <li><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/pull/470" target="_blank" rel="noopener">Auto-claude-code-research-in-sleep #470</a>——
+            Codex invocation-policy 审计与 catalog probe</li>
+          </ul>
+        `,
+      },
+      {
+        id: 'open',
+        title: '在审 PR 与修复',
+        body: `
+          <ul>
+            <li><a href="https://github.com/deepchem/deepchem/pull/5227" target="_blank" rel="noopener">deepchem/deepchem</a>——
+            voxelize 跨通道累加多通道特征向量</li>
+            <li><a href="https://github.com/Future-House/paper-qa/pull/1366" target="_blank" rel="noopener">Future-House/paper-qa</a>——
+            去掉重复的默认 answer-source 限制</li>
+            <li><a href="https://github.com/EmilLindfors/a2a-rs/pull/119" target="_blank" rel="noopener">EmilLindfors/a2a-rs</a>——
+            保留亚毫秒级 retry backoff 精度</li>
+          </ul>
+        `,
+      },
+      {
+        id: 'explore',
+        title: '修过 bug 的仓库',
+        body: `
+          <p>此外还向以下项目提交过验证 / 修复 PR：</p>
+          <ul>
+            <li>stanfordnlp/dspy —— MCP content ordering &amp; verification</li>
+            <li>langchain-ai/langgraph —— cache snapshot validation</li>
+            <li>Future-House/paper-qa —— paperqa config 验证</li>
+          </ul>
         `,
       },
     ],
@@ -329,6 +389,8 @@ export const DOSSIERS = {
       <p>最可靠的联络方式：</p>
       <ul>
         <li>邮箱：<a href="mailto:2637427015@qq.com">2637427015@qq.com</a></li>
+        <li>GitHub：<a href="https://github.com/SiyuanChenToDo" target="_blank" rel="noopener">SiyuanChenToDo</a></li>
+        <li>主页：<a href="https://siyuanchentodo.github.io" target="_blank" rel="noopener">siyuanchentodo.github.io</a></li>
       </ul>
     `,
   },

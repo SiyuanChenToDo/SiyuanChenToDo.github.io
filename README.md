@@ -8,7 +8,7 @@ Three.js 氛围背景，无构建步骤，直接部署 GitHub Pages。
 
 ```
 homepage/
-├── index.html      # 单页：导航 / Hero / 线索板（8 张卡）/ 生活切片 / 页脚
+├── index.html      # 单页：导航 / Hero / 线索板（9 张卡）/ 生活切片 / 页脚
 ├── css/
 │   └── style.css   # 全部样式：木板纹理、卡片、图钉、案卷面板、响应式
 ├── js/
