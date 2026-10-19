@@ -97,14 +97,14 @@ export const DOSSIERS = {
   /* ---------------- 油菜基因大模型 ---------------- */
   'card-rapeseed': {
     title: '油菜基因大模型',
-    subtitle: '湖北省大创结题优秀 · EMNLP Findings (CCF-B) · 转投 ACL 2027 · 第一负责人',
+    subtitle: '湖北省大创结题优秀 · EMNLP Findings (CCF-B) · 第一负责人',
     body: `
       <p><strong>案情：</strong>油菜功能基因研究散落在上万篇文献里，
       育种专家想知道「这个基因可能影响哪个性状」，但人工梳理如大海捞针。</p>
       <p><strong>侦破手段：</strong>用 BERT 从文献中抽取生物实体关系建知识图谱，
       再以零训练的启发式推理在图上做机制级推断，
       最后交给对抗迭代的多智能体闭环互相攻击、修正、收敛。</p>
-      <p><strong>状态：</strong>省大创结题优秀，论文转投 ACL 2027。</p>
+      <p><strong>状态：</strong>省大创结题优秀，论文已被 EMNLP Findings 录用。</p>
       <div class="rq-block">
         <p class="rq-title">研究问题 · RESEARCH QUESTIONS</p>
         <ol>
