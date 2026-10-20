@@ -309,11 +309,11 @@ export const DOSSIERS = {
   /* ---------------- 开源贡献 ---------------- */
   'card-opensource': {
     title: '开源贡献',
-    subtitle: 'OPEN SOURCE · 过去一年 192 commits / 12 PRs',
+    subtitle: 'OPEN SOURCE · 过去一年 199 commits / 16 PRs',
     body: `
       <p><strong>案情：</strong>科研之外，把日常踩到的坑修回上游——
       从大模型推理框架到科研 Agent 工具链，顺手给社区留下几行可复用的代码。</p>
-      <p><strong>年度档案：</strong>192 commits · 12 pull requests · 4 issues · <strong>3 PRs merged</strong>。</p>
+      <p><strong>年度档案：</strong>199 commits · 16 pull requests · 4 issues · <strong>4 PRs merged</strong>。</p>
     `,
     children: [
       {
@@ -323,6 +323,8 @@ export const DOSSIERS = {
           <ul>
             <li><a href="https://github.com/infiniflow/ragflow/pull/21114" target="_blank" rel="noopener">infiniflow/ragflow</a>（92.5k ⭐）——
             让 harness 识别字符串前缀之外的 retryable errors</li>
+            <li><a href="https://github.com/EmilLindfors/a2a-rs/pull/119" target="_blank" rel="noopener">EmilLindfors/a2a-rs #119</a>——
+            修复亚毫秒级 retry backoff 被截断为 0、导致立即重试的问题</li>
             <li><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/pull/471" target="_blank" rel="noopener">Auto-claude-code-research-in-sleep #471</a>——
             只从 YAML frontmatter 解析 tool grants</li>
             <li><a href="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/pull/470" target="_blank" rel="noopener">Auto-claude-code-research-in-sleep #470</a>——
@@ -335,25 +337,27 @@ export const DOSSIERS = {
         title: '在审 PR 与修复',
         body: `
           <ul>
-            <li><a href="https://github.com/deepchem/deepchem/pull/5227" target="_blank" rel="noopener">deepchem/deepchem</a>——
+            <li><a href="https://github.com/deepmodeling/deepmd-kit/pull/6088" target="_blank" rel="noopener">deepmd-kit #6088</a>——
+            fine-tune 描述符警告忽略 runtime-only 选项</li>
+            <li><a href="https://github.com/materialsproject/pymatgen/pull/4723" target="_blank" rel="noopener">pymatgen #4723</a>——
+            XRD hkl 家族按 Laue 群分组</li>
+            <li><a href="https://github.com/getzep/graphiti/pull/2040" target="_blank" rel="noopener">Graphiti #2040</a>——
+            MCP UUID 操作强制 group_id 校验</li>
+            <li><a href="https://github.com/modelscope/ms-agent/pull/1020" target="_blank" rel="noopener">ms-agent #1020</a>——
+            阻止页面抓取访问非公网 URL（SSRF）</li>
+            <li><a href="https://github.com/deepchem/deepchem/pull/5227" target="_blank" rel="noopener">deepchem #5227</a>——
             voxelize 跨通道累加多通道特征向量</li>
-            <li><a href="https://github.com/Future-House/paper-qa/pull/1366" target="_blank" rel="noopener">Future-House/paper-qa</a>——
+            <li><a href="https://github.com/Future-House/paper-qa/pull/1366" target="_blank" rel="noopener">paper-qa #1366</a>——
             去掉重复的默认 answer-source 限制</li>
-            <li><a href="https://github.com/EmilLindfors/a2a-rs/pull/119" target="_blank" rel="noopener">EmilLindfors/a2a-rs</a>——
-            保留亚毫秒级 retry backoff 精度</li>
           </ul>
         `,
       },
       {
         id: 'explore',
-        title: '修过 bug 的仓库',
+        title: '其他探索',
         body: `
-          <p>此外还向以下项目提交过验证 / 修复 PR：</p>
-          <ul>
-            <li>stanfordnlp/dspy —— MCP content ordering &amp; verification</li>
-            <li>langchain-ai/langgraph —— cache snapshot validation</li>
-            <li>Future-House/paper-qa —— paperqa config 验证</li>
-          </ul>
+          <p>此外还在 stanfordnlp/dspy、langchain-ai/langgraph 等仓库做过验证性改动；
+          这些 PR 未合并，不计入上面的贡献统计。</p>
         `,
       },
     ],
